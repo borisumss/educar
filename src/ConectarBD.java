@@ -12,7 +12,7 @@ public class ConectarBD {
     public Connection getConexion(){
         Connection con = null;
         try{
-            //Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, CLAVE);
             System.out.println("conectado con exito");
         }catch(Exception e){
