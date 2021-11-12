@@ -38,7 +38,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Calificacion");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -118,7 +118,7 @@ public class Home extends javax.swing.JFrame {
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {    
-        Page2 p2=new Page2();
+        PantallaDocente p2=new PantallaDocente();
         p2.setVisible(true);
         p2.setSize(680, 539);
         p2.setLocation(0, 0);

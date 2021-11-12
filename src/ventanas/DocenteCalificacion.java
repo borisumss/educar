@@ -4,6 +4,7 @@ package ventanas;
  *
  * @author Harol
  */
+import static java.lang.Integer.parseInt;
 public class DocenteCalificacion extends javax.swing.JFrame {
 
     /**
@@ -185,15 +186,15 @@ public class DocenteCalificacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_calificacionminimaKeyTyped
 
     private void txt_fechaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fechaKeyTyped
-        char c = evt.getKeyChar();
-        if((c<'0' || c>'9') && (c<'/' || c>'/'))evt.consume();
+        //char c = evt.getKeyChar();
+        //if((c<'0' || c>'9') && (c<'/' || c>'/'))evt.consume();
     }//GEN-LAST:event_txt_fechaKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String txtestudiante, txtcalificacionmaxima, txtcalificacionminima,txtfecha;
+        String txtestudiante,txtfecha;
         txtestudiante = txt_estudiante.getText();
-        txtcalificacionmaxima = txt_calificacionmaxima.getText();
-        txtcalificacionminima = txt_calificacionminima.getText();
+        int calificacionmaxima = parseInt(txt_calificacionmaxima.getText());
+        int calificacionminima = parseInt(txt_calificacionminima.getText());
         txtfecha = txt_fecha.getText();
         
         if(txt_estudiante.getText().equals("") || (txt_calificacionmaxima.getText().equals("")) || 
@@ -201,6 +202,18 @@ public class DocenteCalificacion extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this,"Debe completar todos los espacios vacios\n","AVISO",
             javax.swing.JOptionPane.INFORMATION_MESSAGE);
         }
+        try {
+            ConectarBD c =new ConectarBD();
+            String atrSentenciaInsert = String.format("INSERT INTO CALIFICACION (ID_CALIFICACION,NOMBRE_ESTUDIANTE,CALIFICACION_MAXIMA,CALIFICACION_OBTENIDA,FECHA_CALIFICACION)"
+            + "VALUES (null,'"+txtestudiante+"','"+calificacionmaxima+"','"+calificacionminima+"','"+txtfecha+"')");
+    
+            c.ejecutarSentenciaSQL(atrSentenciaInsert);
+            c.con.close();
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        this.vaciar();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -213,6 +226,15 @@ public class DocenteCalificacion extends javax.swing.JFrame {
         /*ELIMINAR!!!!!!*/
     }//GEN-LAST:event_txt_fechaActionPerformed
 
+
+    public void vaciar(){
+        txt_estudiante.setText("");
+        txt_calificacionmaxima.setText("");
+        txt_calificacionminima.setText("");
+        txt_fecha.setText("");
+
+        
+    }
     /**
      * @param args the command line arguments
      */
