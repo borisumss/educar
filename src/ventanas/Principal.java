@@ -102,7 +102,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        this.setVisible(false);
+         Home l = new Home();
+         l.setVisible(true);
     }
 
     public static void main(String args[]) {
