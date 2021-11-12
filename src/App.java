@@ -5,7 +5,6 @@ public class App {
 
         Principal prin = new Principal();
         prin.setVisible(true);
-        // Home l = new Home();
-        // l.setVisible(true);
+       
     }
 }
