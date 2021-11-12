@@ -19,7 +19,7 @@ import funciones.LibroBL;
  */
 public class libros extends javax.swing.JPanel {
     int idGlobal=0;
-    ConectarBD objConexion = new ConectarBD();
+    //ConectarBD objConexion = new ConectarBD();
 
     DefaultTableModel modelo;
     /**
@@ -30,7 +30,7 @@ public class libros extends javax.swing.JPanel {
         
         String[]titulos={"Titulo","Link"};
         modelo=new DefaultTableModel(null,titulos);
-        tblLibros.setModel(modelo);
+        tblLIBRO.setModel(modelo);
         this.mostrarDatos();
         this.limpiar();
     }
@@ -54,14 +54,14 @@ public class libros extends javax.swing.JPanel {
         btnBorrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblLibros = new javax.swing.JTable();
+        tblLIBRO = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Titulo");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Link");
-
+        btnAgregar.setBackground(new java.awt.Color(255, 255, 255));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregar.png"))); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +69,7 @@ public class libros extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
-
+        btnEditar.setBackground(new java.awt.Color(255, 255, 255));
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +78,7 @@ public class libros extends javax.swing.JPanel {
             }
         });
 
+        btnBorrar.setBackground(new java.awt.Color(255, 255, 255));
         btnBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
         btnBorrar.setText("Borrar");
         btnBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +87,7 @@ public class libros extends javax.swing.JPanel {
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 255, 255));
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +96,7 @@ public class libros extends javax.swing.JPanel {
             }
         });
 
-        tblLibros.setModel(new javax.swing.table.DefaultTableModel(
+        tblLIBRO.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -105,12 +107,12 @@ public class libros extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblLibros.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblLIBRO.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblLibrosMouseClicked(evt);
+                tblLIBROMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblLibros);
+        jScrollPane1.setViewportView(tblLIBRO);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,47 +189,60 @@ public class libros extends javax.swing.JPanel {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         
-        LibroBL oLibros=recuperarDatosGUI();
-        String atrSentenciaInsert = String.format("DELETE FROM Libros WHERE titulo='%s'",oLibros.getTitulo());
+        try {
+        ConectarBD objConexion = new ConectarBD();
+        LibroBL oLIBRO=recuperarDatosGUI();
+        String atrSentenciaInsert = String.format("DELETE FROM LIBRO WHERE titulo='%s'",oLIBRO.getTitulo());
         
         objConexion.ejecutarSentenciaSQL(atrSentenciaInsert);
         
-        this.mostrarDatos();
+        this.mostrarDatos();        
         limpiar();
+        objConexion.con.close();
+        }catch (Exception e){
+
+        }
     }                                         
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                           
 
-        
-        LibroBL oLibros=recuperarDatosGUI();
-        String atrSentenciaInsert = String.format("INSERT INTO Libros (id, titulo, link)"
-                + " VALUES (null, '%s', '%s')",oLibros.getTitulo(),oLibros.getLink());
+        try {
+        ConectarBD objConexion = new ConectarBD();
+        LibroBL oLIBRO=recuperarDatosGUI();
+        String atrSentenciaInsert = String.format("INSERT INTO LIBRO (COD_LIBRO, TITULO, LINK_LIBRO, DOCENTE_COD_DOCENTE)"
+                + " VALUES (null, '%s', '%s', 1)",oLIBRO.getTitulo(),oLIBRO.getLink());
         
         objConexion.ejecutarSentenciaSQL(atrSentenciaInsert);
         this.mostrarDatos();
         limpiar();
+        objConexion.con.close();
+
+        }catch(Exception e){}
+        
     }                                          
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
 
-        
-        LibroBL oLibros=recuperarDatosGUI();
-        String atrSentenciaInsert = String.format("UPDATE Libros SET titulo='%s',"
-                + "link='%s' WHERE id="+idGlobal+"",oLibros.getTitulo(),oLibros.getLink());
+        try {
+        ConectarBD objConexion = new ConectarBD();
+        LibroBL oLIBRO=recuperarDatosGUI();
+        String atrSentenciaInsert = String.format("UPDATE LIBRO SET TITULO='%s',"
+                + "LINK_LIBRO='%s' WHERE COD_LIBRO="+idGlobal+"",oLIBRO.getTitulo(),oLIBRO.getLink());
         
         objConexion.ejecutarSentenciaSQL(atrSentenciaInsert);
         this.mostrarDatos();
         limpiar();
+        }catch(Exception e){}
     }                                         
 
-    private void tblLibrosMouseClicked(java.awt.event.MouseEvent evt) {                                       
+    private void tblLIBROMouseClicked(java.awt.event.MouseEvent evt) {                                       
                if(evt.getClickCount()==1){
         
             JTable receptor= (JTable)evt.getSource();
             txtTitulo.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),0).toString());
             txtLink.setText(receptor.getModel().getValueAt(receptor.getSelectedRow(),1).toString());
-            LibroBL oLibros=recuperarDatosGUI();
-            String tituloE=oLibros.getTitulo();
+            LibroBL oLIBRO=recuperarDatosGUI();
+            String tituloE=oLIBRO.getTitulo();
             idGlobal=encontrarID(tituloE);
             
             btnAgregar.setEnabled(false);
@@ -244,18 +259,21 @@ public class libros extends javax.swing.JPanel {
             modelo.removeRow(0);
         }
 
-                try {
-        ResultSet resultado=objConexion.consultarRegistro("SELECT * FROM Libros");
+        try {
+            ConectarBD objConexion = new ConectarBD();
+        ResultSet resultado=objConexion.consultarRegistro("SELECT * FROM LIBRO");
         
         while(resultado.next()){
         
-            System.out.println(resultado.getString("id"));
-            System.out.println(resultado.getString("titulo"));
-            System.out.println(resultado.getString("link"));
+            System.out.println(resultado.getString("COD_LIBRO"));
+            System.out.println(resultado.getString("TITULO"));
+            System.out.println(resultado.getString("LINK_LIBRO"));
             
-            Object[] oUsuario={resultado.getString("titulo"),resultado.getString("link")};
+            Object[] oUsuario={resultado.getString("TITULO"),resultado.getString("LINK_LIBRO")};
             modelo.addRow(oUsuario);
         }
+
+        objConexion.con.close();
         } catch(SQLException e){
             System.out.println(e);
         }
@@ -266,14 +284,16 @@ public class libros extends javax.swing.JPanel {
         int res=0;
 
         try {
-                 ResultSet resultado=objConexion.consultarRegistro("SELECT id FROM Libros WHERE titulo='"+nombre+"'");
+            ConectarBD objConexion = new ConectarBD();
+                 ResultSet resultado=objConexion.consultarRegistro("SELECT COD_LIBRO FROM LIBRO WHERE titulo='"+nombre+"'");
         
         while(resultado.next()){
         
-            System.out.println("Id encontrado" + resultado.getString("id"));
-            res=parseInt(resultado.getString("id"));
+            System.out.println("Id encontrado" + resultado.getString("COD_LIBRO"));
+            res=parseInt(resultado.getString("COD_LIBRO"));
             System.out.println("Id convertido" + res);
         }
+        objConexion.con.close();
         } catch(SQLException e){
             System.out.println(e);
         }
@@ -283,11 +303,11 @@ public class libros extends javax.swing.JPanel {
     
     
     public LibroBL recuperarDatosGUI(){
-        LibroBL olibros=new LibroBL();
+        LibroBL oLIBRO=new LibroBL();
         
-        olibros.setTitulo(txtTitulo.getText());
-        olibros.setLink(txtLink.getText());
-    return olibros;
+        oLIBRO.setTitulo(txtTitulo.getText());
+        oLIBRO.setLink(txtLink.getText());
+    return oLIBRO;
     }
     
     public void limpiar(){
@@ -295,7 +315,7 @@ public class libros extends javax.swing.JPanel {
         txtTitulo.setText("");
         txtLink.setText("");
         ///Desabilitamos botones
-        
+       
         btnAgregar.setEnabled(true);
         btnEditar.setEnabled(false);
         btnBorrar.setEnabled(false);
@@ -311,7 +331,7 @@ public class libros extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblLibros;
+    private javax.swing.JTable tblLIBRO;
     private javax.swing.JTextField txtLink;
     private javax.swing.JTextField txtTitulo;
     // End of variables declaration                   

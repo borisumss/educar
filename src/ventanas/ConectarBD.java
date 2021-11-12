@@ -21,9 +21,9 @@ public class ConectarBD {
      * System.out.println("Error: " + e.getMessage()); } return con; }
      */
     public ConectarBD() {
-        // Connection con = null;
+
         try {
-            // Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, CLAVE);
             System.out.println("conectado con exito");
         } catch (Exception e) {
@@ -43,6 +43,7 @@ public class ConectarBD {
             System.out.println(e);
             return 0;
         }
+
     }
 
     public ResultSet consultarRegistro(String strSentenciaSQL) {
