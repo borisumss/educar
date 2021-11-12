@@ -30,7 +30,7 @@ public class ConectarBD {
     public ConectarBD(){
 
         try{
-            //Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(URL, USER, CLAVE);
             System.out.println("conectado con exito");
         }catch(Exception e){
