@@ -40,6 +40,8 @@ public class Page2 extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addContainerGap(250, Short.MAX_VALUE))
         );
+        
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
