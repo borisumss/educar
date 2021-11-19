@@ -1,9 +1,17 @@
 {
-    "java.project.sourcePaths": ["src"],
+    "java.project.sourcePaths": [
+        "src"
+    ],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
+<<<<<<< HEAD
         "c:\\Users\\Boris\\Documents\\SISTEMAS DE INFORMACION 2\\mysql-connector-java-8.0.26\\mysql-connector-java-8.0.26.jar"
     ],
     "java.format.settings.url": "eclipse-formatter.xml"
+=======
+        "c:\\Users\\cesar\\Downloads\\mysql-connector-java-8.0.26\\mysql-connector-java-8.0.26\\mysql-connector-java-8.0.26.jar",
+        "c:\\Users\\Windows\\Desktop\\Sistemas de Informacion\\mysql-connector-java-8.0.26\\mysql-connector-java-8.0.26.jar"
+    ]
+>>>>>>> c0b78c5d20fa06087faadc3619ca6f8ac38f0f69
 }
