@@ -9,13 +9,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+
 public class GuardarArchivo {
     FileInputStream archivo = null;
     Connection con;
     String subirArchivo = "INSERT INTO TRABAJO_INDIVIDUAL VALUES (null,?,?,?)";
     int[] codigos = new int[2];
     String buscarEstudianteMatriculado = "SELECT M.COD_MATERIA, E.COD_ESTUDIANTE FROM MATERIA M, ESTUDIANTE E,ESTUDIANTE_MATRICULADO EM WHERE E.COD_ESTUDIANTE=EM.COD_ESTUDIANTE AND M.COD_MATERIA=EM.COD_MATERIA AND E.NOMBRE=? AND E.COD_SIS=? AND M.NOMBRE_MATERIA=? AND M.GRUPO=?";
-    
+
     public void guardarArchivo(File archivoSeleccionado,String nombreMateria,int grupo,String nombreEstudiante,int codSis){
         con = new ConectarBD().getConnection();
         consultaEstudiante(nombreEstudiante,codSis,nombreMateria,grupo);
